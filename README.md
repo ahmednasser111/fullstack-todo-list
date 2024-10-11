@@ -73,7 +73,6 @@ To get a local copy up and running, follow these steps:
 - **Add a Todo**: Click on the floating "+" button to create a new todo item.
 - **Edit a Todo**: Click on a todo item to edit its content.
 - **Delete a Todo**: Use the delete button next to each todo to remove it.
-- **Mark as Completed**: Toggle the checkbox of a todo item to mark it as completed.
 
 ## Contributing
 
