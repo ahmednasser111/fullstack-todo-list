@@ -4,7 +4,7 @@ import Paginator from "../components/ui/Paginator";
 import ErrorHandler from "../components/errors/ErrorHandler";
 import TodoSkeleton from "../components/ui/TodoSkeleton";
 import useAuthQuery from "../hooks/useAuthQuery";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Search from "../components/ui/Search";
 
 interface IProps {}
@@ -31,10 +31,10 @@ function Todos({}: IProps) {
 		setPage(1); // Reset to the first page when items per page changes
 	};
 
-	const handleSearch = (query: string) => {
+	const handleSearch = useCallback((query: string) => {
 		setSearchQuery(query);
-		setPage(1);
-	};
+		setPage(1); // Reset page when search changes
+	}, []);
 
 	const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setSortBy(event.target.value);
@@ -77,8 +77,8 @@ function Todos({}: IProps) {
 			searchQuery,
 			sortBy,
 			sortOrder,
-		], // Track sort order in query key
-		url: `/todos/?pagination[pageSize]=${itemsPerPage}&pagination[page]=${page}&filters[title][$contains]=${searchQuery}&sort=${sortBy}:${sortOrder}`, // Add sorting order here
+		],
+		url: `/todos/?pagination[pageSize]=${itemsPerPage}&pagination[page]=${page}&filters[title][$contains]=${searchQuery}&sort=${sortBy}:${sortOrder}`,
 		config: {
 			headers: {
 				Authorization: `Bearer ${userJwt}`,

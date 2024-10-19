@@ -1,18 +1,23 @@
-// In your Search component
+import { memo, useCallback } from "react";
+import { debounce } from "lodash";
+
 interface SearchProps {
 	onSearch: (query: string) => void;
-	value: string; // Add value prop to capture the current input value
+	value: string;
 }
 
-export default function Search({ onSearch, value }: SearchProps) {
+function Search({ onSearch, value }: SearchProps) {
+	// Debounce the onSearch function to limit rapid calls
+	const debouncedSearch = useCallback(debounce(onSearch, 500), []);
+
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		onSearch(event.target.value); // Call the onSearch with the input value
+		debouncedSearch(event.target.value);
 	};
 
 	return (
 		<input
 			type="text"
-			value={value} // Set the value of the input
+			defaultValue={value} // Use defaultValue to avoid controlled input issues
 			onChange={handleChange}
 			placeholder="Search todos..."
 			className="border border-gray-300 rounded-md p-2 w-full"
@@ -20,3 +25,5 @@ export default function Search({ onSearch, value }: SearchProps) {
 		/>
 	);
 }
+
+export default memo(Search);
