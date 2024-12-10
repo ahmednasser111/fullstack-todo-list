@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast, { Toaster } from "react-hot-toast";
-import { AxiosError } from "axios";
 import { IEditTodo } from "../../interfaces/index";
 import { editConfig } from "../../data/index";
 import { EditSchema } from "../../validation/index";
@@ -33,7 +32,7 @@ function AddTodo({ close }: IProps) {
 		try {
 			const res = await axiosInstance.post(
 				`/todos/`,
-				{ data: { ...data, user: [userId] } },
+				{ data: { ...data, user: [+userId] } },
 				{
 					headers: {
 						Authorization: `Bearer ${userJwt}`,
@@ -46,9 +45,9 @@ function AddTodo({ close }: IProps) {
 				toast.success("Todo added successfully!");
 				close(); // Close modal or navigate away after success
 			} else {
-				toast.warn("Todo was added but something went wrong!");
+				toast("Todo was added but something went wrong!");
 			}
-		} catch (error: AxiosError) {
+		} catch (error: any) {
 			// Detailed error handling
 			if (!error.response) {
 				// Network error or timeout
@@ -106,7 +105,7 @@ function AddTodo({ close }: IProps) {
 					</button>
 				</div>
 			</form>
-			<Toaster position="bottom-center" duration="1500" />
+			<Toaster position="bottom-center" />
 		</>
 	);
 }

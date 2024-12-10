@@ -1,7 +1,5 @@
 import toast, { Toaster } from "react-hot-toast";
-import { AxiosError } from "axios";
-import { IEditTodo, ITodo } from "../../interfaces/index";
-import { editConfig } from "../../data/index";
+import { ITodo } from "../../interfaces/index";
 import { useState } from "react";
 import LoadingButton from "./LoadingButton";
 import { axiosInstance } from "../../config/axios.config";
@@ -30,9 +28,9 @@ function Delete({ close, todo }: IProps) {
 				toast.success("Todo Deleted successfully!");
 				close(); // Close modal or navigate away after success
 			} else {
-				toast.warn("Todo was Deleted but something went wrong!");
+				toast("Todo was Deleted but something went wrong!");
 			}
-		} catch (error: AxiosError) {
+		} catch (error: any) {
 			// Detailed error handling
 			if (!error.response) {
 				// Network error or timeout
@@ -65,7 +63,7 @@ function Delete({ close, todo }: IProps) {
 					Close
 				</button>
 			</div>
-			<Toaster position="bottom-center" duration={1500} />
+			<Toaster position="bottom-center" />
 		</>
 	);
 }

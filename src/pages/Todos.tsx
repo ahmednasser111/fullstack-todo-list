@@ -6,6 +6,7 @@ import TodoSkeleton from "../components/ui/TodoSkeleton";
 import useAuthQuery from "../hooks/useAuthQuery";
 import { useState, useCallback } from "react";
 import Search from "../components/ui/Search";
+import { IApiTodo } from "../interfaces/index";
 
 interface IProps {}
 
@@ -100,7 +101,7 @@ function Todos({}: IProps) {
 		);
 
 	if (error) {
-		return <ErrorHandler statusCode={error.status} title={error.message} />;
+		return <ErrorHandler statusCode={Number(error)} title={error.message} />;
 	}
 
 	return (
@@ -153,7 +154,7 @@ function Todos({}: IProps) {
 
 				{data.data.length ? (
 					<ul className="space-y-4">
-						{data.data.map((todo, index: number) => (
+						{data.data.map((todo: IApiTodo, index: number) => (
 							<li
 								key={todo.id}
 								className={`p-4 rounded-md shadow ${

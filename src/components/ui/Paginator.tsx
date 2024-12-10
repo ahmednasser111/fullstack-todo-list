@@ -52,7 +52,7 @@ const Paginator = ({
 				{displayPages.map((page) => (
 					<button
 						key={page}
-						onClick={() => handlePageChange(page)}
+						onClick={() => handlePageChange(page || 0)}
 						className={`px-2 py-1 text-xs md:px-3 md:py-1 rounded-md ${
 							currentPage === page ? "bg-blue-500 text-white" : "bg-gray-200"
 						}`}>

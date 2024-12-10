@@ -6,7 +6,6 @@ import { RegisterConfig } from "../data/index";
 import { registerSchema } from "../validation/index";
 import { axiosInstance } from "../config/axios.config";
 import toast, { Toaster } from "react-hot-toast";
-import { AxiosError } from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingButton from "../components/ui/LoadingButton";
 
@@ -35,7 +34,7 @@ function Register() {
 				toast.success("Registration successful! Welcome aboard.");
 				setTimeout(() => navigate("/login"), 2000);
 			}
-		} catch (error: AxiosError) {
+		} catch (error: any) {
 			const errorMessage = error.response?.data?.error?.message;
 			// console.log(errorMessage);
 			toast.error(errorMessage);
@@ -90,7 +89,7 @@ function Register() {
 				</Link>
 			</div>
 
-			<Toaster position="bottom-center" duration="1500" />
+			<Toaster position="bottom-center" />
 		</div>
 	);
 }

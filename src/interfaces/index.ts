@@ -11,7 +11,7 @@ export interface IRegisterInput {
 
 export interface IEditTodo {
 	title: string;
-	description: string;
+	description?: string;
 }
 
 export interface IFieldConfig<T> {
@@ -27,4 +27,15 @@ export interface ITodo {
 	completed: boolean;
 	createdAt: string;
 	updatedAt: string;
+}
+export interface IApiTodo {
+	id: number;
+	attributes: {
+		title: string;
+		completed: boolean;
+		description: string;
+		createdAt: string;
+		updatedAt: string;
+		publishedAt: string;
+	};
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-	baseURL: "http://localhost:1337/api",
-	timeout: 1000,
+	baseURL: "https://todo-strapi-api-production.up.railway.app/api",
+	timeout: 2000,
 });

@@ -6,7 +6,6 @@ import { loginConfig } from "../data/index";
 import { axiosInstance } from "../config/axios.config";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
-import { AxiosError } from "axios";
 import LoadingButton from "../components/ui/LoadingButton";
 
 function Login() {
@@ -29,7 +28,7 @@ function Login() {
 				localStorage["loggedInUser"] = JSON.stringify(res.data);
 				location.replace("/");
 			}
-		} catch (error: AxiosError) {
+		} catch (error: any) {
 			toast.error(error.response?.data.error.message || "Unknown error!");
 		} finally {
 			setIsLoading(false);
@@ -73,7 +72,7 @@ function Login() {
 					<LoadingButton value="Login" isLoading={isLoading} />
 				</button>
 			</form>
-			<Toaster position="bottom-center" duration="1500" />
+			<Toaster position="bottom-center" />
 		</div>
 	);
 }

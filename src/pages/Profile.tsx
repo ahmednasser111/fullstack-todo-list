@@ -1,5 +1,5 @@
 const Profile = () => {
-	const userData = JSON.parse(localStorage.getItem("loggedInUser"));
+	const userData = JSON.parse(localStorage["loggedInUser"]);
 
 	return (
 		<div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">

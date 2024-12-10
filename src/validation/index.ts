@@ -36,6 +36,6 @@ export const registerSchema = Yup.object().shape({
 export const EditSchema = Yup.object().shape({
 	title: Yup.string()
 		.required("Title is required")
-		.min(6, "Title must be at least 6 characters"),
+		.min(1, "Title must be at least 1 characters"),
 	description: Yup.string(),
 });

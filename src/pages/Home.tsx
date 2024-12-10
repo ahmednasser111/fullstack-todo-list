@@ -30,9 +30,11 @@ function Home() {
 				</div>
 			</div>
 		);
-
 	if (error) {
-		return <ErrorHandler statusCode={error.status} title={error.message} />;
+		console.log(error);
+		return (
+			<ErrorHandler statusCode={Number(error.name)} title={error.message} />
+		);
 	}
 
 	return (

@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast, { Toaster } from "react-hot-toast";
-import { AxiosError } from "axios";
 import { IEditTodo, ITodo } from "../../interfaces/index";
 import { editConfig } from "../../data/index";
 import { EditSchema } from "../../validation/index";
@@ -45,9 +44,9 @@ function Edit({ close, todo }: IProps) {
 				toast.success("Todo updated successfully!");
 				close(); // Close modal or navigate away after success
 			} else {
-				toast.warn("Todo was updated but something went wrong!");
+				toast("Todo was updated but something went wrong!");
 			}
-		} catch (error: AxiosError) {
+		} catch (error: any) {
 			// Detailed error handling
 			if (!error.response) {
 				// Network error or timeout
@@ -106,7 +105,7 @@ function Edit({ close, todo }: IProps) {
 					</button>
 				</div>
 			</form>
-			<Toaster position="bottom-center" duration="1500" />
+			<Toaster position="bottom-center" />
 		</>
 	);
 }
