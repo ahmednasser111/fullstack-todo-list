@@ -36,7 +36,6 @@ function Home() {
 			<ErrorHandler statusCode={Number(error.name)} title={error.message} />
 		);
 	}
-
 	return (
 		<div className="p-4 sm:p-6 lg:p-8">
 			<div className="w-full max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
