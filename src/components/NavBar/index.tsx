@@ -14,8 +14,8 @@ function NavBar({}: IProps) {
 		localStorage.removeItem("loggedInUser");
 		toast.success("Logout successful! Redirecting...");
 		setTimeout(() => {
-			location.replace("/login");
-		}, 1500);
+			location.replace("/");
+		}, 2000);
 	}
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
