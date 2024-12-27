@@ -35,10 +35,7 @@ function AddTodo({ close }: IProps) {
 				{
 					data: {
 						...data,
-						user: {
-							disconnect: [],
-							connect: [{ id: +userId, position: { end: true } }],
-						},
+						user: +userId,
 					},
 				},
 				{
