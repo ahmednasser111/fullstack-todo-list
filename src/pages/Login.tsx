@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import { loginSchema } from "../validation/index";
 import { ILoginInput } from "../interfaces/index";
 import { loginConfig } from "../data/index";
 import { axiosInstance } from "../config/axios.config";
-import toast, { Toaster } from "react-hot-toast";
-import { useState } from "react";
 import LoadingButton from "../components/ui/LoadingButton";
-import { Link } from "react-router-dom";
 
 function Login() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -23,11 +23,10 @@ function Login() {
 		setIsLoading(true);
 		try {
 			const res = await axiosInstance.post("/auth/local/", data);
-			console.log(res);
 			if (res.status === 200) {
 				toast.success("Login successful! Redirecting...");
-				localStorage["loggedInUser"] = JSON.stringify(res.data);
-				location.replace("/");
+				localStorage.setItem("loggedInUser", JSON.stringify(res.data));
+				window.location.replace("/");
 			}
 		} catch (error: any) {
 			toast.error(error.response?.data.error.message || "Unknown error!");
@@ -60,29 +59,33 @@ function Login() {
 	));
 
 	return (
-		<div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">
-			<h2 className="text-2xl font-bold mb-4 text-center">
-				Login to get access!
-			</h2>
-			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-				{renderInputs}
-				<button
-					type="submit"
-					className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 c"
-					disabled={isLoading}>
-					<LoadingButton value="Login" isLoading={isLoading} />
-				</button>
-			</form>
-
-			<div className="text-center mt-4">
-				<span className="text-gray-700 mr-2">Does not have an account?</span>
-				<Link
-					to="/register"
-					className="text-blue-500 hover:text-blue-700 font-semibold">
-					Register
-				</Link>
+		<div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+			<div className="max-w-md w-full space-y-8">
+				<div>
+					<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+						Login to get access!
+					</h2>
+				</div>
+				<form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+					<div className="rounded-md shadow-sm -space-y-px">{renderInputs}</div>
+					<div>
+						<button
+							type="submit"
+							className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+							disabled={isLoading}>
+							<LoadingButton value="Login" isLoading={isLoading} />
+						</button>
+					</div>
+				</form>
+				<div className="text-center">
+					<span className="text-gray-700 mr-2">Don't have an account?</span>
+					<Link
+						to="/register"
+						className="font-medium text-blue-600 hover:text-blue-500">
+						Register
+					</Link>
+				</div>
 			</div>
-
 			<Toaster position="bottom-center" />
 		</div>
 	);

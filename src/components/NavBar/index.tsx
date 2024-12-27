@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 
 interface IProps {}
@@ -27,10 +28,10 @@ function NavBar({}: IProps) {
 
 	function handleLogout() {
 		localStorage.removeItem("loggedInUser");
-		alert("Logout successful! Redirecting...");
+		toast.success("Logout successful! Redirecting...");
 		setTimeout(() => {
 			window.location.href = "/";
-		}, 2000);
+		}, 1000);
 	}
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -38,7 +39,7 @@ function NavBar({}: IProps) {
 
 	return (
 		<nav className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
 						<NavLink
@@ -227,6 +228,7 @@ function NavBar({}: IProps) {
 					)}
 				</div>
 			</div>
+			<Toaster position="bottom-center" />
 		</nav>
 	);
 }
