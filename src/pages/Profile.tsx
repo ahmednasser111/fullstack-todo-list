@@ -1,4 +1,3 @@
-import React from "react";
 import { UserCircle, Mail, Shield, CheckCircle, XCircle } from "lucide-react";
 
 const Profile = () => {
