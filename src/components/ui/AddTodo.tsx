@@ -32,7 +32,7 @@ function AddTodo({ close }: IProps) {
 		try {
 			const res = await axiosInstance.post(
 				`/todos/`,
-				{ data: { ...data, user: [+userId] } },
+				{ data: { ...data, user: [{ id: +userId }] } },
 				{
 					headers: {
 						Authorization: `Bearer ${userJwt}`,
