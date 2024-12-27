@@ -8,7 +8,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import LoadingButton from "../components/ui/LoadingButton";
 import { Link } from "react-router-dom";
-import Register from "./Register";
 
 function Login() {
 	const [isLoading, setIsLoading] = useState(false);
