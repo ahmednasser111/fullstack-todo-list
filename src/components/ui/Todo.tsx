@@ -8,9 +8,10 @@ import Modal from "./Modal";
 interface IProps {
 	todo: ITodo;
 	index: number;
+	refetch: () => void;
 }
 
-function Todo({ todo, index }: IProps) {
+function Todo({ todo, index, refetch }: IProps) {
 	let [isEditOpen, setIsEditOpen] = useState(false);
 	let [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -71,12 +72,12 @@ function Todo({ todo, index }: IProps) {
 
 			{/* Edit modal */}
 			<Modal title="Edit this todo" isOpen={isEditOpen} close={closeEdit}>
-				<Edit close={closeEdit} todo={todo} />
+				<Edit close={closeEdit} todo={todo} refetch={refetch} />
 			</Modal>
 
 			{/* Delete modal */}
 			<Modal title="Delete this todo" isOpen={isDeleteOpen} close={closeDelete}>
-				<Delete close={closeDelete} todo={todo} />
+				<Delete close={closeDelete} todo={todo} refetch={refetch} />
 			</Modal>
 		</li>
 	);

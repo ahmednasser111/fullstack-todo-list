@@ -11,9 +11,10 @@ import { axiosInstance } from "../../config/axios.config";
 interface IProps {
 	close: () => void;
 	todo: ITodo;
+	refetch: () => void;
 }
 
-function Edit({ close, todo }: IProps) {
+function Edit({ close, todo, refetch }: IProps) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const {
@@ -42,6 +43,7 @@ function Edit({ close, todo }: IProps) {
 			// Check if the request was successful
 			if (res.status === 200 || res.status === 204) {
 				toast.success("Todo updated successfully!");
+				refetch();
 				close(); // Close modal or navigate away after success
 			} else {
 				toast("Todo was updated but something went wrong!");

@@ -7,9 +7,10 @@ import { axiosInstance } from "../../config/axios.config";
 interface IProps {
 	close: () => void;
 	todo: ITodo;
+	refetch: () => void;
 }
 
-function Delete({ close, todo }: IProps) {
+function Delete({ close, todo, refetch }: IProps) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const onSubmit = async () => {
@@ -26,6 +27,7 @@ function Delete({ close, todo }: IProps) {
 			// Check if the request was successful
 			if (res.status === 200 || res.status === 204) {
 				toast.success("Todo Deleted successfully!");
+				refetch();
 				close(); // Close modal or navigate away after success
 			} else {
 				toast("Todo was Deleted but something went wrong!");
