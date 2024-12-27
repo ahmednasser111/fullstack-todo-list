@@ -2,7 +2,11 @@ import { useState } from "react";
 import Modal from "./Modal"; // Assuming you have a reusable Modal component
 import AddTodo from "./AddTodo"; // The form for adding a new todo
 
-function AddButton() {
+interface IProps {
+	refetch: () => void;
+}
+
+function AddButton({ refetch }: IProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	function openModal() {
@@ -24,7 +28,7 @@ function AddButton() {
 
 			{/* Modal for Adding a New Todo */}
 			<Modal title="Add New Todo" isOpen={isModalOpen} close={closeModal}>
-				<AddTodo close={closeModal} />
+				<AddTodo close={closeModal} refetch={refetch} />
 			</Modal>
 		</div>
 	);

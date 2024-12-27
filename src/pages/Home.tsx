@@ -8,7 +8,7 @@ import TodoSkeleton from "../components/ui/TodoSkeleton";
 function Home() {
 	const userData = JSON.parse(localStorage["loggedInUser"]);
 
-	const { data, isLoading, error } = useAuthQuery({
+	const { data, isLoading, error, refetch } = useAuthQuery({
 		queryKey: ["todoList"],
 		url: "/users/me?populate=todos",
 		config: {
@@ -31,7 +31,6 @@ function Home() {
 			</div>
 		);
 	if (error) {
-		console.log(error);
 		return (
 			<ErrorHandler statusCode={Number(error.name)} title={error.message} />
 		);
@@ -53,7 +52,7 @@ function Home() {
 			</div>
 
 			{/* Floating Action Button */}
-			<AddButton />
+			<AddButton refetch={refetch} />
 		</div>
 	);
 }

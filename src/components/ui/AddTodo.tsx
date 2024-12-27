@@ -10,9 +10,10 @@ import { axiosInstance } from "../../config/axios.config";
 
 interface IProps {
 	close: () => void;
+	refetch: () => void;
 }
 
-function AddTodo({ close }: IProps) {
+function AddTodo({ close, refetch }: IProps) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const userData = JSON.parse(localStorage["loggedInUser"]);
@@ -48,6 +49,7 @@ function AddTodo({ close }: IProps) {
 			// Check if the request was successful
 			if (res.status === 200 || res.status === 204) {
 				toast.success("Todo added successfully!");
+				refetch();
 				close(); // Close modal or navigate away after success
 			} else {
 				toast("Todo was added but something went wrong!");
