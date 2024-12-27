@@ -14,6 +14,7 @@ import Todos from "../pages/Todos";
 
 const storedUser = localStorage.getItem("loggedInUser");
 const userData = storedUser ? JSON.parse(storedUser) : null;
+console.log(userData);
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -52,22 +53,6 @@ const router = createBrowserRouter(
 					}
 				/>
 				<Route path="register" element={<Register />} />
-				{/* <Route
-					path="login"
-					element={
-						<ProtectedRoute condition={!isLoggedIn} path="/contribute">
-							<About />
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path="contribute"
-					element={
-						<ProtectedRoute condition={isLoggedIn} path="/login">
-							<Contact />
-						</ProtectedRoute>
-					}
-				/> */}
 			</Route>
 
 			<Route

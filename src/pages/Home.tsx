@@ -31,6 +31,7 @@ function Home() {
 			</div>
 		);
 	if (error) {
+		localStorage.removeItem("loggedInUser");
 		return (
 			<ErrorHandler statusCode={Number(error.name)} title={error.message} />
 		);

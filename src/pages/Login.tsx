@@ -7,6 +7,8 @@ import { axiosInstance } from "../config/axios.config";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import LoadingButton from "../components/ui/LoadingButton";
+import { Link } from "react-router-dom";
+import Register from "./Register";
 
 function Login() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -72,6 +74,16 @@ function Login() {
 					<LoadingButton value="Login" isLoading={isLoading} />
 				</button>
 			</form>
+
+			<div className="text-center mt-4">
+				<span className="text-gray-700 mr-2">Does not have an account?</span>
+				<Link
+					to="/register"
+					className="text-blue-500 hover:text-blue-700 font-semibold">
+					Register
+				</Link>
+			</div>
+
 			<Toaster position="bottom-center" />
 		</div>
 	);
